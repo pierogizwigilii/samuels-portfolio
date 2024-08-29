@@ -1,0 +1,14 @@
+@use '../../_css/common.scss' as *;
+
+.mainContent {
+    background-color: blue;
+}
+
+.homepageContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    
+    @include small-break {
+        grid-template-columns: 1fr 2fr;
+    }
+}
