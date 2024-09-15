@@ -9,50 +9,58 @@ import classes from "./index.module.scss";
 const Homepage = (props) => {
 
     const films = [
-        {
+        {//GridItem 1
             id: 1,
             title: "My first film",
             releaseDate: "2014-11-09T00:00:00.000Z",
             coverImage: "https://placehold.co/1920x1080.png",
             freeText: "This is my first film that I made in 2014 blah blah blah",
             gallery: [
-                {
+                { //page 1
                     title: "Film",
-                    youtubeEmbedLink: 'https://www.youtube.com/watch?v=DLEHxCChQac',
+                    youtubeEmbedLink: 'https://www.youtube.com/watch?v=Ppjp09-XUyQ&list=PLVtco_at_bxqkbYNhAI2a1QbAeJcEmweU&index=6&ab_channel=K.K.Slider',
+                },
+                { //page 2
+                    title: "Film Dos",
+                    youtubeEmbedLink: 'https://www.youtube.com/watch?v=oPI4hxajStM&ab_channel=PomodoroCat',
+                },
+                {//page 3
+                    title: "Film Poster",
+                    imageUrl: "https://placehold.co/1920x1080.png"
                 }
             ]
         },
         
-        {
+        {//GridItem 2
             id: 2,
             title: "My second film",
             releaseDate: "2024-08-09T00:00:00.000Z",
             coverImage: "https://placehold.co/1920x1080.png",
             freeText: "This is my best",
             gallery: [
-                {
+                {//page 1
                     title: "Main Video",
                     youtubeEmbedLink: 'https://www.youtube.com/watch?v=DLEHxCChQac'
                 },
-                {
+                {//page 2
                     title: "Behind the Scenes",
                     youtubeEmbedLink: 'https://www.youtube.com/watch?v=DLEHxCChQac',
                 }
             ]
         },
         
-        {
+        {//GridItem 3
             id: 3,
             title: "My third film",
             releaseDate: "2016-05-05T00:00:00.000Z",
             coverImage: "https://placehold.co/1920x1080.png",
             freeText: "I like this movie",
             gallery: [
-                {
+                {//page 1
                     title: "Main Video",
                     youtubeEmbedLink: 'https://www.youtube.com/watch?v=DLEHxCChQac'
                 },
-                {
+                {//page 2
                     title: "Film Poster",
                     imageUrl: "https://placehold.co/1920x1080.png"
                 }
