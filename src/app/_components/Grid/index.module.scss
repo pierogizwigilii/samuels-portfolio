@@ -2,11 +2,13 @@
 
 .gridContainer {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 20px;
+    column-gap: 20px;
+    height: 500px;
+    padding: 30px;
 
     @include small-break {
-        grid-template-columns: 1fr 1fr;
-        row-gap: 20px;
-        column-gap: 20px;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 }

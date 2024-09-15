@@ -1,7 +1,8 @@
 @use '../../_css/common.scss' as *;
 
 .mainContent {
-    background-color: blue;
+    background-color: #f9f6f2;
+    color: #272624;
 }
 
 .homepageContainer {
@@ -11,4 +12,8 @@
     @include small-break {
         grid-template-columns: 1fr 2fr;
     }
+}
+
+.blockItem {
+    background-color: #272624;
 }

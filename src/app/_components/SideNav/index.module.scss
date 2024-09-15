@@ -1,3 +1,7 @@
+@use '../../_css/common.scss' as *;
+
 .sideNav {
-    background-color: red;
+    background-color: #f9f6f2;
+    color: #272624;
+    padding: 40px;
 }

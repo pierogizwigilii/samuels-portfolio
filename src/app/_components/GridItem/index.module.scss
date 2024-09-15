@@ -1,0 +1,10 @@
+@use '../../_css/common.scss' as *;
+
+.gridItem {
+    background-color: antiquewhite;
+}
+
+.regularSquare {
+    grid-column: span 2;
+    grid-row: span 2;
+}
