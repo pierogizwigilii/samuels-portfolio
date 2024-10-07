@@ -1,0 +1,19 @@
+@use '../../_css/common.scss' as *;
+
+.titleContainer {
+    padding: 10px;
+}
+
+@include small-break {
+
+    .titleContainer {
+        position: sticky;
+        bottom: 10px;
+        left: 30px;
+        padding: 10px;
+        transform: rotate(-90deg);
+        transform-origin: center;
+        flex: 0 0 auto;
+        align-self: flex-start;
+    }
+}

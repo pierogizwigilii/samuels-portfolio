@@ -3,6 +3,10 @@ import SideNav from '../../_components/SideNav';
 import Grid from '../../_components/Grid';
 import HomepageHero from '../../_components/HomepageHero';
 import GridItem from '@/app/_components/GridItem';
+import StickyTitle from '@/app/_components/StickyTitle';
+import HeroGrid from '@/app/_components/HeroGrid';
+import ContentGrid from '@/app/_components/ContentGrid';
+import GridGutter from '@/app/_components/GridGutter';
 
 import classes from "./index.module.scss";
 
@@ -88,72 +92,74 @@ const Homepage = (props) => {
 
     return (
         <div className={classes.homepageContainer}>
-            <SideNav />
+            <HeroGrid>
+                <SideNav />
+                <HomepageHero />
+            </HeroGrid>
 
-            <div className={classes.mainContent}>
-                <section className={classes.section}>
-                    {/* Main/Hero Section */}
-                    <HomepageHero>
-                        
-                    </HomepageHero>
-                </section>
+            <ContentGrid>
+                <GridGutter>
+                    <StickyTitle />
+                </GridGutter>
+                <div className={classes.mainContent}>
 
-                <section className={classes.section}>
-                    {/* Film Section */}
-                    <Grid>
-                        {
-                            films.map((film) => {
-                                // format date to nice readable string
-                                const date = new Date(film.releaseDate);
-                                const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                                const formattedDate = date.toLocaleDateString('en-GB', options);
+                    <section className={classes.section}>
+                        {/* Film Section */}
+                        <Grid>
+                            {
+                                films.map((film) => {
+                                    // format date to nice readable string
+                                    const date = new Date(film.releaseDate);
+                                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                                    const formattedDate = date.toLocaleDateString('en-GB', options);
 
-                                return (
-                                    <GridItem columnSpan={2} rowSpan={2} key={film.id} content={film}>
-                                        <img src={film.coverImage} />
-                                        <h2>{film.title}</h2>
-                                        <p>{film.freeText}</p>
-                                        <p>{formattedDate}</p>
-                                    </GridItem>
-                                )
-                            })
-                        }
-                    </Grid>
-                </section>
+                                    return (
+                                        <GridItem columnSpan={1} rowSpan={2} key={film.id} content={film}>
+                                            <img src={film.coverImage} />
+                                            <h2>{film.title}</h2>
+                                            <p>{film.freeText}</p>
+                                            <p>{formattedDate}</p>
+                                        </GridItem>
+                                    )
+                                })
+                            }
+                        </Grid>
+                    </section>
 
-                <section className={classes.section}>
-                    {/* Music Section */}
-                    <Grid>
-                        
-                    </Grid>
-                </section>
+                    <section className={classes.section}>
+                        {/* Music Section */}
+                        <Grid>
+                            
+                        </Grid>
+                    </section>
 
-                <section className={classes.section}>
-                    {/* Photography Section */}
-                    <Grid>
-                        
-                    </Grid>
-                </section>
+                    <section className={classes.section}>
+                        {/* Photography Section */}
+                        <Grid>
+                            
+                        </Grid>
+                    </section>
 
-                <section className={classes.section}>
-                    {/* Professional Section */}
-                    <Grid>
-                        
-                    </Grid>
-                </section>
+                    <section className={classes.section}>
+                        {/* Professional Section */}
+                        <Grid>
+                            
+                        </Grid>
+                    </section>
 
-                <section className={classes.section}>
-                    {/* About Section */}
-
-
-                </section>
-
-                <section className={classes.section}>
-                    {/* Contact Section */}
+                    <section className={classes.section}>
+                        {/* About Section */}
 
 
-                </section>
-            </div>
+                    </section>
+
+                    <section className={classes.section}>
+                        {/* Contact Section */}
+
+
+                    </section>
+                </div>
+            </ContentGrid>
         </div>
     )
 }

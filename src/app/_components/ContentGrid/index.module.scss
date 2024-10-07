@@ -1,0 +1,13 @@
+@use '../../_css/common.scss' as *;
+
+.contentGridContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+@include small-break {
+
+    .contentGridContainer {
+        grid-template-columns: 1fr 2fr;
+    }
+}
