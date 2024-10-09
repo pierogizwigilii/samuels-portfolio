@@ -1,7 +1,50 @@
 @use '../../_css/common.scss' as *;
 
 .sideNav {
-    background-color: #f9f6f2;
-    color: #272624;
-    padding: 20px;
+    padding: 10px 25px;
+
+    h1 {
+       margin: 20px 0; 
+    }
+
+    p {
+        margin: 0 0 16px;
+    }
+
+    nav {
+
+        ul {
+            list-style-type: none;
+            padding: 0px;
+
+            li {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+@include small-break {
+
+    .sideNav {
+        padding: 20px;
+
+        p {
+            margin: 0 0 24px 16px;
+        }
+
+        nav {
+
+            ul {
+                list-style-type: none;
+                margin: 0 0 0 16px;
+                padding: 0px;
+
+                li {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
 }

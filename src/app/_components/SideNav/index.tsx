@@ -8,11 +8,11 @@ const SideNav = (props) => {
             <p>creative person that does a lot</p>
             <nav>
                 <ul>
-                    <li>Film</li>
-                    <li>Music</li>
-                    <li>Graphic design</li>
-                    <li>About</li>
-                    <li>Contact</li>
+                    <a id="film"><li>Film</li></a>
+                    <a id="music"><li>Music</li></a>
+                    <a id="graphicDesign"><li>Graphic design</li></a>
+                    <a id="about"><li>About</li></a>
+                    <a id="contact"><li>Contact</li></a>
                 </ul>
             </nav>
          </div>

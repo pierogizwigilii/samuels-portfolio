@@ -1,10 +1,10 @@
 @use '../../_css/common.scss' as *;
 
 .homepageContainer {
+    background-color: #f9f6f2;
+    color: #272624;
 
     .mainContent {
-        background-color: #f9f6f2;
-        color: #272624;
 
         .section {
             display: flex;

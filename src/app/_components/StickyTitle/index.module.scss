@@ -1,19 +1,44 @@
 @use '../../_css/common.scss' as *;
 
 .titleContainer {
-    padding: 10px;
+    padding: 10px 20px 5px;
+
+    a {
+        text-decoration: none;
+    }
+
+    h2 {
+        margin: 22px 0;
+        font-size: 48px;
+    }
+
+    h3 {
+        margin: 18px 0;
+        font-size: 28px;
+    }
 }
 
 @include small-break {
 
     .titleContainer {
         position: sticky;
-        bottom: 10px;
-        left: 30px;
+        top: 40px;
+        left: 100px;
         padding: 10px;
+        margin: 20px 0;
         transform: rotate(-90deg);
         transform-origin: center;
         flex: 0 0 auto;
         align-self: flex-start;
+
+        h2 {
+            font-size: 55px;
+            margin: 25px 0;
+        }
+
+        h3 {
+            font-size: 32px;
+            margin: 20px 0;
+        }
     }
 }
