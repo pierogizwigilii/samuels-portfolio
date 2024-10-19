@@ -90,6 +90,20 @@ const Homepage = (props) => {
         }
     ];
 
+    const titles = [
+        {//StickyTitle 1
+            id: 1,
+            name: "Film",
+            category: "Direction"
+        },
+
+        {//StickyTitle 2
+            id: 2,
+            name: "Music",
+            category: "Sound design"
+        }
+    ];
+
     return (
         <div className={classes.homepageContainer}>
             <HeroGrid>
@@ -99,7 +113,17 @@ const Homepage = (props) => {
 
             <ContentGrid>
                 <GridGutter>
-                    <StickyTitle />
+                    {
+                        titles.map((title) => {
+
+                            return (
+                                <StickyTitle key={title.id} content={title}>
+                                    <h2>{title.name}</h2>
+                                    <h3>{title.category}</h3>
+                                </StickyTitle>
+                            )
+                        })
+                    }
                 </GridGutter>
                 <div className={classes.mainContent}>
 

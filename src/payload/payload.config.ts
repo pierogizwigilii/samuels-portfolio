@@ -12,7 +12,6 @@ import { buildConfig } from 'payload/config'
 
 import Categories from './collections/Categories'
 import Comments from './collections/Comments'
-import { GraphicDesignProjects } from './collections/GraphicDesignProjects'
 import { ImageMedia } from './collections/ImageMedia'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
@@ -66,7 +65,7 @@ export default buildConfig({
     url: process.env.DATABASE_URI,
   }),
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
-  collections: [Pages, Posts, Projects, Media, Categories, Users, Comments, GraphicDesignProjects, ImageMedia],
+  collections: [Pages, Posts, Projects, Media, Categories, Users, Comments, ImageMedia],
   globals: [Settings, Header, Footer],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),

@@ -7,6 +7,29 @@ export const MediaBlock: Block = {
   fields: [
     invertBackground,
     {
+      name: 'size',
+      type: 'select',
+      defaultValue: 'oneThird',
+      options: [
+        {
+          value: 'oneThird',
+          label: 'One Third',
+        },
+        {
+          value: 'half',
+          label: 'Half',
+        },
+        {
+          value: 'twoThirds',
+          label: 'Two Thirds',
+        },
+        {
+          value: 'full',
+          label: 'Full',
+        },
+      ],
+    },
+    {
       name: 'position',
       type: 'select',
       defaultValue: 'default',

@@ -44,7 +44,21 @@ export const Projects: CollectionConfig = {
       required: true,
     },
     {
-      name: 'categories',
+      name: 'description',
+      type: 'textarea',
+      required: true,
+    },
+    {
+      name: 'coverImage',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+      filterOptions: {
+        mimeType: { contains: 'image' },
+      },
+    },
+    {
+      name: 'categories', //StickyTitle
       type: 'relationship',
       relationTo: 'categories',
       hasMany: true,
@@ -60,14 +74,17 @@ export const Projects: CollectionConfig = {
       },
     },
     {
+      name: 'creationDate',
+      type: 'date',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
       type: 'tabs',
       tabs: [
         {
-          label: 'Hero',
-          fields: [hero],
-        },
-        {
-          label: 'Content',
+          label: 'Content', //use this for modal
           fields: [
             {
               name: 'layout',

@@ -22,7 +22,22 @@ type RichText = (
 const richText: RichText = (
   overrides,
   additions = {
-    elements: [],
+    elements: [
+      'h1',
+      'h2',
+      'h3',
+      'h4',
+      'h5',
+      'h6',
+      'blockquote',
+      'link',
+      'ol',
+      'ul',
+      'textAlign',
+      'indent',
+      'relationship',
+      'upload',
+    ],
     leaves: [],
   },
 ) => {
