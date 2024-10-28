@@ -41,7 +41,7 @@ const GridItem = ({ rowSpan, columnSpan, children, content }) => {
         }
     };
 
-    const currentGalleryItem = content.gallery[currentGalleryIndex];
+    //const currentGalleryItem = content.gallery[currentGalleryIndex];
 
     return (
         <div
@@ -51,7 +51,7 @@ const GridItem = ({ rowSpan, columnSpan, children, content }) => {
         >
             { children }
 
-            <Modal isOpen={isOpen}>
+            {/* <Modal isOpen={isOpen}>
                 <button onClick={onClickCloseButton}>Close</button>
                 <h2>{content.title}</h2>
                 <p>{new Date(content.releaseDate).toLocaleDateString()}</p>
@@ -71,7 +71,7 @@ const GridItem = ({ rowSpan, columnSpan, children, content }) => {
                     </span>
                     <button onClick={nextGalleryItem} disabled={currentGalleryIndex === content.gallery.length - 1}>Next</button>
                 </div>
-            </Modal>
+            </Modal> */}
         </div>
     );
 };

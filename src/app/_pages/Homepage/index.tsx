@@ -9,183 +9,110 @@ import ContentGrid from '@/app/_components/ContentGrid';
 import GridGutter from '@/app/_components/GridGutter';
 
 import classes from "./index.module.scss";
+import fetchProjects from '@/app/_api/fetchProjects';
 
-const Homepage = (props) => {
-
-    const films = [
-        {//GridItem 1
-            id: 1,
-            title: "My first film",
-            releaseDate: "2014-11-09T00:00:00.000Z",
-            coverImage: "https://placehold.co/1920x1080.png",
-            freeText: "This is my first film that I made in 2014 blah blah blah",
-            gallery: [
-                { //page 1
-                    title: "Film",
-                    youtubeEmbedLink: 'https://www.youtube.com/watch?v=Ppjp09-XUyQ&list=PLVtco_at_bxqkbYNhAI2a1QbAeJcEmweU&index=6&ab_channel=K.K.Slider',
-                },
-                { //page 2
-                    title: "Film Dos",
-                    youtubeEmbedLink: 'https://www.youtube.com/watch?v=oPI4hxajStM&ab_channel=PomodoroCat',
-                },
-                {//page 3
-                    title: "Film Poster",
-                    imageUrl: "https://placehold.co/1920x1080.png"
-                }
-            ]
-        },
+const Homepage = async (props) => {
+ // First, let's organize projects by category pairs
+ const organizeProjectsByCategory = (projects) => {
+    const organized = {};
+    const orderArray = []; // To maintain category order
+    
+    projects.forEach(project => {
+      if (!project.categories || project.categories.length === 0) return;
+      
+      const parentCategory = project.categories.find(cat => !cat.parent);
+      const subcategory = project.categories.find(cat => cat.parent === parentCategory?.id);
+      
+      const categoryKey = subcategory 
+        ? `${parentCategory.title}/${subcategory.title}`
+        : `${parentCategory.title}`;
         
-        {//GridItem 2
-            id: 2,
-            title: "My second film",
-            releaseDate: "2024-08-09T00:00:00.000Z",
-            coverImage: "https://placehold.co/1920x1080.png",
-            freeText: "This is my best",
-            gallery: [
-                {//page 1
-                    title: "Main Video",
-                    youtubeEmbedLink: 'https://www.youtube.com/watch?v=DLEHxCChQac'
-                },
-                {//page 2
-                    title: "Behind the Scenes",
-                    youtubeEmbedLink: 'https://www.youtube.com/watch?v=DLEHxCChQac',
-                }
-            ]
-        },
+      if (!organized[categoryKey]) {
+        organized[categoryKey] = {
+          parent: parentCategory,
+          sub: subcategory,
+          projects: []
+        };
+        orderArray.push(categoryKey);
+      }
+      
+      organized[categoryKey].projects.push(project);
+    });
+    
+    return { organized, orderArray };
+  };
+
+  const projects = await fetchProjects();
+  const { organized: categoryGroups, orderArray } = organizeProjectsByCategory(projects.docs);
+
+  return (
+    <div className={classes.homepageContainer}>
+        <HeroGrid>
+            <SideNav />
+            <HomepageHero />
+        </HeroGrid>
+        <div className="portfolio-grids">
+        {orderArray.map((categoryKey, index) => {
+        const categoryData = categoryGroups[categoryKey];
+        const previousCategoryKey = index > 0 ? orderArray[index - 1] : null;
+        const previousCategoryData = previousCategoryKey ? categoryGroups[previousCategoryKey] : null;
         
-        {//GridItem 3
-            id: 3,
-            title: "My third film",
-            releaseDate: "2016-05-05T00:00:00.000Z",
-            coverImage: "https://placehold.co/1920x1080.png",
-            freeText: "I like this movie",
-            gallery: [
-                {//page 1
-                    title: "Main Video",
-                    youtubeEmbedLink: 'https://www.youtube.com/watch?v=DLEHxCChQac'
-                },
-                {//page 2
-                    title: "Film Poster",
-                    imageUrl: "https://placehold.co/1920x1080.png"
-                }
-            ]
-        },
+        // Check if we should show the parent category
+        const showParentCategory = !previousCategoryData || 
+          previousCategoryData.parent.title !== categoryData.parent.title;
 
-        {
-            id: 4,
-            title: "My fourth film",
-            releaseDate: "2020-11-09T00:00:00.000Z",
-            coverImage: "https://placehold.co/1920x1080.png",
-            freeText: "2020 sucked",
-            gallery: [
-                {
-                    title: "Main Video",
-                    youtubeEmbedLink: 'https://www.youtube.com/watch?v=DLEHxCChQac'
-                },
-                {
-                    title: "Notes",
-                    body: "This is some text written inside the CMS to explain some work I've done"
-                }
-            ]
-        }
-    ];
+        return (
+          <ContentGrid key={categoryKey}>
+            <GridGutter>
+              <StickyTitle>
+                {showParentCategory && <h2>{categoryData.parent.title}</h2>}
+                {categoryData.sub && (
+                  <h3>
+                    {categoryData.sub.title}
+                  </h3>
+                )}
+              </StickyTitle>
+            </GridGutter>
 
-    const titles = [
-        {//StickyTitle 1
-            id: 1,
-            name: "Film",
-            category: "Direction"
-        },
+            <div className="main-content">
+              <section className="section">
+                {categoryData.projects.map(project => {
+                  const date = project.creationDate ? new Date(project.creationDate) : null;
+                  const formattedDate = date ? date.toLocaleDateString('en-GB', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  }) : '';
 
-        {//StickyTitle 2
-            id: 2,
-            name: "Music",
-            category: "Sound design"
-        }
-    ];
-
-    return (
-        <div className={classes.homepageContainer}>
-            <HeroGrid>
-                <SideNav />
-                <HomepageHero />
-            </HeroGrid>
-
-            <ContentGrid>
-                <GridGutter>
-                    {
-                        titles.map((title) => {
-
-                            return (
-                                <StickyTitle key={title.id} content={title}>
-                                    <h2>{title.name}</h2>
-                                    <h3>{title.category}</h3>
-                                </StickyTitle>
-                            )
-                        })
-                    }
-                </GridGutter>
-                <div className={classes.mainContent}>
-
-                    <section className={classes.section}>
-                        {/* Film Section */}
-                        <Grid>
-                            {
-                                films.map((film) => {
-                                    // format date to nice readable string
-                                    const date = new Date(film.releaseDate);
-                                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                                    const formattedDate = date.toLocaleDateString('en-GB', options);
-
-                                    return (
-                                        <GridItem columnSpan={1} rowSpan={2} key={film.id} content={film}>
-                                            <img src={film.coverImage} />
-                                            <h2>{film.title}</h2>
-                                            <p>{film.freeText}</p>
-                                            <p>{formattedDate}</p>
-                                        </GridItem>
-                                    )
-                                })
-                            }
-                        </Grid>
-                    </section>
-
-                    <section className={classes.section}>
-                        {/* Music Section */}
-                        <Grid>
-                            
-                        </Grid>
-                    </section>
-
-                    <section className={classes.section}>
-                        {/* Photography Section */}
-                        <Grid>
-                            
-                        </Grid>
-                    </section>
-
-                    <section className={classes.section}>
-                        {/* Professional Section */}
-                        <Grid>
-                            
-                        </Grid>
-                    </section>
-
-                    <section className={classes.section}>
-                        {/* About Section */}
-
-
-                    </section>
-
-                    <section className={classes.section}>
-                        {/* Contact Section */}
-
-
-                    </section>
-                </div>
-            </ContentGrid>
+                  return (
+                    <GridItem
+                      key={project.id}
+                      columnSpan={1}
+                      rowSpan={2}
+                      content={project}
+                    >
+                      {project.coverImage && (
+                        <img
+                          src={project.coverImage.url}
+                          alt={project.coverImage.alt || project.title}
+                          className="cover-image"
+                        />
+                      )}
+                      <h2>{project.title}</h2>
+                      <p>{project.description}</p>
+                      <p>{formattedDate}</p>
+                    </GridItem>
+                  );
+                })}
+              </section>
+            </div>
+          </ContentGrid>
+        );
+      })}
         </div>
-    )
+    </div>
+  );
+
 }
 
 export default Homepage;
